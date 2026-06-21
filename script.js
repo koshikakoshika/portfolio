@@ -401,32 +401,54 @@ function initAchievementsSlider() {
 
 /* 5. Card 3D Tilt Interaction */
 function initCard3DTilt() {
-  const targetCards = document.querySelectorAll(".achievement-card, .about-visual-card, .project-card");
+  const targetCards = document.querySelectorAll(".achievement-card, .about-visual-card, .project-card, .timeline-content");
   
   targetCards.forEach(card => {
-    card.addEventListener("mousemove", (e) => {
+    const handleMove = (clientX, clientY) => {
       // Only tilt achievements cards if they are active (focused)
       if (card.classList.contains("achievement-card") && !card.classList.contains("active-card")) {
         return;
       }
 
       const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+      const x = clientX - rect.left;
+      const y = clientY - rect.top;
       
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
       
-      const rotateX = ((centerY - y) / centerY) * 8;
-      const rotateY = -((centerX - x) / centerX) * 8;
+      const rotateX = ((centerY - y) / centerY) * 10;
+      const rotateY = -((centerX - x) / centerX) * 10;
       
-      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03, 1.03, 1.03)`;
+      card.style.boxShadow = `0 15px 35px rgba(255, 255, 255, 0.12)`;
+    };
+
+    const handleReset = () => {
+      card.style.transform = "";
+      card.style.boxShadow = "";
+    };
+
+    // Mouse events
+    card.addEventListener("mousemove", (e) => {
+      handleMove(e.clientX, e.clientY);
     });
 
-    card.addEventListener("mouseleave", () => {
-      // Reset inline transform completely to let CSS class rules take over
-      card.style.transform = "";
-    });
+    card.addEventListener("mouseleave", handleReset);
+
+    // Touch events for mobile touch support ("move on touching front and back")
+    card.addEventListener("touchstart", (e) => {
+      const touch = e.touches[0];
+      handleMove(touch.clientX, touch.clientY);
+    }, { passive: true });
+
+    card.addEventListener("touchmove", (e) => {
+      const touch = e.touches[0];
+      handleMove(touch.clientX, touch.clientY);
+    }, { passive: true });
+
+    card.addEventListener("touchend", handleReset);
+    card.addEventListener("touchcancel", handleReset);
   });
 }
 
@@ -528,17 +550,17 @@ function initThemeToggle() {
   if (!toggleBtn) return;
   const icon = toggleBtn.querySelector("i");
   
-  // Apply saved theme on page load
+  // Apply saved theme on page load (toggles fa-regular and fa-solid for fa-lightbulb)
   const savedTheme = localStorage.getItem("theme");
   if (savedTheme === "light") {
     document.body.classList.add("light-mode");
     if (icon) {
-      icon.classList.replace("fa-sun", "fa-moon");
+      icon.className = "fa-solid fa-lightbulb";
     }
   } else {
     document.body.classList.remove("light-mode");
     if (icon) {
-      icon.classList.replace("fa-moon", "fa-sun");
+      icon.className = "fa-regular fa-lightbulb";
     }
   }
 
@@ -549,12 +571,12 @@ function initThemeToggle() {
     if (isLight) {
       localStorage.setItem("theme", "light");
       if (icon) {
-        icon.classList.replace("fa-sun", "fa-moon");
+        icon.className = "fa-solid fa-lightbulb";
       }
     } else {
       localStorage.setItem("theme", "dark");
       if (icon) {
-        icon.classList.replace("fa-moon", "fa-sun");
+        icon.className = "fa-regular fa-lightbulb";
       }
     }
     
