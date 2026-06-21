@@ -780,8 +780,7 @@ section {
   overflow: hidden;
   transform-style: preserve-3d;
   transform: perspective(1000px);
-  opacity: 0.45;
-  filter: blur(2px);
+  opacity: 0.5;
   transform: scale(0.9);
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
@@ -789,7 +788,6 @@ section {
 /* Center focused active state */
 .achievement-card.active-card {
   opacity: 1 !important;
-  filter: none !important;
   transform: scale(1.03) translateY(-5px) !important;
   border-color: rgba(255, 255, 255, 0.25) !important;
   box-shadow: 0 10px 30px rgba(255, 255, 255, 0.08) !important;
@@ -1069,7 +1067,7 @@ section {
 .contact-container {
   display: grid;
   grid-template-columns: 1fr 1.2fr;
-  gap: 60px;
+  gap: 30px;
   max-width: 1100px;
   margin: 0 auto;
 }
@@ -1086,14 +1084,14 @@ section {
 .contact-info-panel p {
   color: var(--text-secondary);
   font-size: 1.05rem;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 .contact-details {
   display: flex;
   flex-direction: column;
-  gap: 25px;
-  margin-bottom: 40px;
+  gap: 15px;
+  margin-bottom: 15px;
 }
 
 .contact-method {
@@ -1142,11 +1140,11 @@ section {
 }
 
 .contact-form-panel {
-  padding: 40px;
+  padding: 30px;
 }
 
 .form-group {
-  margin-bottom: 24px;
+  margin-bottom: 15px;
 }
 
 .form-group label {
@@ -1180,7 +1178,7 @@ section {
 
 textarea.form-control {
   resize: vertical;
-  min-height: 140px;
+  min-height: 100px;
 }
 
 .submit-btn {
@@ -1201,6 +1199,10 @@ textarea.form-control {
   transform: translateY(-2px);
   background: #eaeaea;
   box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
+}
+
+section.contact {
+  padding: 45px 8% 20px 8% !important;
 }
 
 /* Footer */
