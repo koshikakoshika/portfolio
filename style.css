@@ -119,7 +119,8 @@ body.light-mode .slider-nav-btn:hover {
 }
 
 /* Light mode active card override */
-body.light-mode .achievement-card.active-card {
+body.light-mode .achievement-card.active-card,
+body.light-mode .project-card.active-card {
   border-color: rgba(0, 0, 0, 0.2) !important;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06) !important;
 }
@@ -825,7 +826,8 @@ section {
 }
 
 /* Individual slider cards sizing */
-.slider-track .achievement-card {
+.slider-track .achievement-card,
+.slider-track .project-card {
   flex: 0 0 350px;
   width: 350px;
   display: flex;
@@ -881,7 +883,7 @@ section {
   overflow: hidden;
   transform-style: preserve-3d;
   transform: perspective(1000px);
-  opacity: 0.5;
+  opacity: 0.6;
   transform: scale(0.9);
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
@@ -993,12 +995,22 @@ section {
   overflow: hidden;
   transform-style: preserve-3d;
   transform: perspective(1000px);
+  opacity: 0.6;
+  transform: scale(0.9);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-.project-card:hover {
-  transform: translateY(-5px);
-  border-color: rgba(255, 255, 255, 0.35);
-  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.05);
+.project-card.active-card {
+  opacity: 1 !important;
+  transform: scale(1.03) translateY(-5px) !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.08) !important;
+}
+
+.project-card.active-card:hover {
+  transform: scale(1.03) translateY(-8px) !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
+  box-shadow: 0 15px 35px rgba(255, 255, 255, 0.12) !important;
 }
 
 .project-icon {

@@ -192,26 +192,16 @@ function initGSAPAnimations() {
 
   // Projects reveal
   if (document.querySelector(".projects")) {
-    gsap.from(".project-card", {
+    gsap.from(".projects .achievements-carousel-wrapper", {
       scrollTrigger: {
-        trigger: ".projects-grid",
-        start: "top 95%"
+        trigger: ".projects",
+        start: "top 75%"
       },
-      y: 30,
+      y: 40,
       opacity: 0,
       duration: 0.8,
-      stagger: 0.1,
       ease: "power3.out"
     });
-
-    // Safety fallback: if ScrollTrigger fails to trigger after 1.5 seconds, force reveal project cards
-    setTimeout(() => {
-      document.querySelectorAll(".project-card").forEach(card => {
-        if (gsap.getProperty(card, "opacity") === 0) {
-          gsap.to(card, { opacity: 1, y: 0, duration: 0.5 });
-        }
-      });
-    }, 1500);
   }
 
   // Critical fix: Refresh ScrollTrigger after elements load to align trigger positions
@@ -230,7 +220,7 @@ function initAchievementsSlider() {
 
   // Helper: update which card is currently active (centered) in the track
   function updateActiveCard(track) {
-    const cards = track.querySelectorAll(".achievement-card");
+    const cards = track.querySelectorAll(".achievement-card, .project-card");
     if (cards.length === 0) return;
 
     // Check if the track actually has scroll overflow
