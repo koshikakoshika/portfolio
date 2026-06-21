@@ -1,6 +1,7 @@
 /* script.js - Core Logic, GSAP Animations, Typewriter, and Achievements Slider */
 
 document.addEventListener("DOMContentLoaded", () => {
+  initThemeToggle();
   initHeaderScroll();
   initTypewriter();
   initGSAPAnimations();
@@ -222,6 +223,17 @@ function initAchievementsSlider() {
     const cards = track.querySelectorAll(".achievement-card");
     if (cards.length === 0) return;
 
+    // Check if the track actually has scroll overflow
+    const hasOverflow = track.scrollWidth > track.clientWidth + 10;
+
+    if (!hasOverflow) {
+      // If there is no overflow, make all cards active so they are fully visible and readable
+      cards.forEach(card => {
+        card.classList.add("active-card");
+      });
+      return;
+    }
+
     const trackRect = track.getBoundingClientRect();
     const trackCenter = trackRect.left + trackRect.width / 2;
 
@@ -303,6 +315,15 @@ function initAchievementsSlider() {
 
     const updateNavButtons = () => {
       if (!prevBtn || !nextBtn) return;
+
+      // If no overflow, hide both navigation buttons
+      if (track.scrollWidth <= track.clientWidth + 10) {
+        prevBtn.style.opacity = "0";
+        prevBtn.style.pointerEvents = "none";
+        nextBtn.style.opacity = "0";
+        nextBtn.style.pointerEvents = "none";
+        return;
+      }
       
       const scrollLeft = track.scrollLeft;
       const maxScrollLeft = track.scrollWidth - track.clientWidth;
@@ -498,5 +519,48 @@ function initDraggableCard() {
   card.addEventListener('touchstart', onStart, { passive: true });
   window.addEventListener('touchmove', onMove, { passive: false });
   window.addEventListener('touchend', onEnd);
+}
+
+/* 8. Light/Dark Theme Toggle Logic */
+function initThemeToggle() {
+  const toggleBtn = document.getElementById("theme-toggle");
+  if (!toggleBtn) return;
+  const icon = toggleBtn.querySelector("i");
+  
+  // Apply saved theme on page load
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "light") {
+    document.body.classList.add("light-mode");
+    if (icon) {
+      icon.classList.replace("fa-sun", "fa-moon");
+    }
+  } else {
+    document.body.classList.remove("light-mode");
+    if (icon) {
+      icon.classList.replace("fa-moon", "fa-sun");
+    }
+  }
+
+  toggleBtn.addEventListener("click", () => {
+    document.body.classList.toggle("light-mode");
+    const isLight = document.body.classList.contains("light-mode");
+    
+    if (isLight) {
+      localStorage.setItem("theme", "light");
+      if (icon) {
+        icon.classList.replace("fa-sun", "fa-moon");
+      }
+    } else {
+      localStorage.setItem("theme", "dark");
+      if (icon) {
+        icon.classList.replace("fa-moon", "fa-sun");
+      }
+    }
+    
+    // Refresh ScrollTrigger as heights/styling might adjust slightly
+    if (typeof ScrollTrigger !== "undefined") {
+      ScrollTrigger.refresh();
+    }
+  });
 }
 

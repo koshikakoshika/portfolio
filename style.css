@@ -34,6 +34,107 @@
   --transition-fast: all 0.2s ease;
 }
 
+body.light-mode {
+  --bg-color: #ffffff;
+  --bg-card: rgba(0, 0, 0, 0.02);
+  --text-primary: #000000;
+  --text-secondary: #444444;
+  --text-muted: #777777;
+
+  --accent-orange: #000000;
+  --accent-orange-glow: rgba(0, 0, 0, 0.01);
+  --accent-blue: #000000;
+  --accent-blue-glow: rgba(0, 0, 0, 0.01);
+  --accent-violet: #000000;
+  --accent-violet-glow: rgba(0, 0, 0, 0.01);
+
+  --glass-bg: rgba(0, 0, 0, 0.02);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --glass-border-hover: rgba(0, 0, 0, 0.25);
+  --shadow-main: 0 8px 30px rgba(0, 0, 0, 0.05);
+}
+
+body.light-mode header {
+  background: rgba(255, 255, 255, 0.5) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
+}
+
+body.light-mode .logo span {
+  background: linear-gradient(135deg, #000000, #888888) !important;
+  -webkit-background-clip: text !important;
+}
+
+body.light-mode .section-title span {
+  background: linear-gradient(90deg, #000000, #888888) !important;
+  -webkit-background-clip: text !important;
+}
+
+body.light-mode .project-icon {
+  background: linear-gradient(135deg, #000000, #888888) !important;
+  -webkit-background-clip: text !important;
+}
+
+body.light-mode .skill-bar-fill {
+  background: linear-gradient(90deg, #000000, #999999) !important;
+}
+
+/* Light mode scrollbar thumb override */
+body.light-mode::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15) !important;
+}
+body.light-mode::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.35) !important;
+}
+
+/* Light mode primary button override */
+body.light-mode .primary-btn,
+body.light-mode .submit-btn {
+  background: #000000 !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+}
+body.light-mode .primary-btn:hover,
+body.light-mode .submit-btn:hover {
+  background: #222222 !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Light mode header override */
+body.light-mode header.scrolled {
+  background: rgba(255, 255, 255, 0.85) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Light mode slider buttons override */
+body.light-mode .slider-nav-btn {
+  background: rgba(255, 255, 255, 0.95) !important;
+  color: #000000 !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+}
+body.light-mode .slider-nav-btn:hover {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border-color: #000000 !important;
+}
+
+/* Light mode active card override */
+body.light-mode .achievement-card.active-card {
+  border-color: rgba(0, 0, 0, 0.2) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* Light mode form control override */
+body.light-mode .form-control {
+  background: rgba(0, 0, 0, 0.01) !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  color: #000000 !important;
+}
+body.light-mode .form-control:focus {
+  border-color: #000000 !important;
+  background: rgba(0, 0, 0, 0.03) !important;
+}
+
 /* Reset */
 * {
   margin: 0;
@@ -180,7 +281,7 @@ nav a::after {
   left: 0;
   width: 0;
   height: 2px;
-  background: #ffffff;
+  background: var(--text-primary);
   transition: var(--transition-fast);
 }
 
@@ -316,7 +417,7 @@ section {
 
 .hover-char {
   display: inline-block;
-  color: #ffffff;
+  color: var(--text-primary);
   transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275),
               color 0.25s ease,
               -webkit-text-stroke 0.25s ease;
@@ -325,7 +426,7 @@ section {
 
 .hover-char:hover {
   transform: translateY(-5px) scale(1.05);
-  -webkit-text-stroke: 1.5px #ffffff;
+  -webkit-text-stroke: 1.5px var(--text-primary);
   color: transparent;
 }
 
@@ -401,7 +502,7 @@ section {
 
 .cursor-blink {
   animation: blink 0.8s infinite;
-  color: #ffffff;
+  color: var(--text-primary);
   font-weight: 300;
   margin-left: 2px;
 }
@@ -510,7 +611,7 @@ section {
   font-size: 1.1rem;
   color: var(--text-secondary);
   margin-bottom: 30px;
-  border-left: 3px solid #ffffff;
+  border-left: 3px solid var(--text-primary);
   padding-left: 20px;
 }
 
@@ -530,7 +631,7 @@ section {
   font-family: var(--font-heading);
   font-size: 2.2rem;
   font-weight: 800;
-  color: #ffffff;
+  color: var(--text-primary);
 }
 
 .meta-label {
@@ -551,7 +652,7 @@ section {
   content: '';
   position: absolute;
   width: 2px;
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--glass-border);
   top: 0;
   bottom: 0;
   left: 50%;
@@ -582,7 +683,7 @@ section {
   right: -10px;
   top: 25px;
   background: #000000;
-  border: 4px solid #ffffff;
+  border: 4px solid var(--text-primary);
   border-radius: 50%;
   z-index: 10;
 }
@@ -736,10 +837,10 @@ section {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-  color: #ffffff;
+  background: var(--bg-color);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-main);
+  color: var(--text-primary);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -750,9 +851,9 @@ section {
 }
 
 .slider-nav-btn:hover {
-  background: #ffffff;
-  color: #000000;
-  border-color: #ffffff;
+  background: var(--text-primary);
+  color: var(--bg-color);
+  border-color: var(--text-primary);
   transform: scale(1.08);
 }
 
@@ -796,7 +897,7 @@ section {
 .achievement-icon {
   font-size: 2.2rem;
   margin-bottom: 20px;
-  color: #ffffff;
+  color: var(--text-primary);
 }
 
 .achievement-card-title {
@@ -828,7 +929,7 @@ section {
   color: var(--text-muted);
   margin-top: 20px;
   font-weight: 500;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid var(--glass-border);
   padding-top: 12px;
   text-transform: uppercase;
 }
@@ -935,7 +1036,7 @@ section {
 .project-tag {
   padding: 4px 12px;
   background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--glass-border);
   border-radius: 20px;
   font-family: var(--font-mono);
   font-size: 0.75rem;
@@ -963,7 +1064,7 @@ section {
 }
 
 .project-link:hover {
-  color: #ffffff;
+  color: var(--text-primary);
   text-decoration: underline;
 }
 
@@ -1014,7 +1115,7 @@ section {
 }
 
 .skills-category h3 i {
-  color: #ffffff;
+  color: var(--text-primary);
 }
 
 .skills-list {
@@ -1043,13 +1144,13 @@ section {
   font-family: var(--font-mono);
   font-weight: 600;
   font-size: 0.95rem;
-  color: #ffffff;
+  color: var(--text-primary);
 }
 
 .skill-bar-bg {
   width: 100%;
   height: 6px;
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--glass-border);
   border-radius: 10px;
   overflow: hidden;
   position: relative;
@@ -1109,7 +1210,7 @@ section {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #ffffff;
+  color: var(--text-primary);
   font-size: 1.2rem;
 }
 
@@ -1135,7 +1236,7 @@ section {
 }
 
 .contact-method-detail a:hover {
-  color: #ffffff;
+  color: var(--text-primary);
   text-decoration: underline;
 }
 
@@ -1171,7 +1272,7 @@ section {
 
 .form-control:focus {
   outline: none;
-  border-color: #ffffff;
+  border-color: var(--text-primary);
   background: rgba(255, 255, 255, 0.05);
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.08);
 }
