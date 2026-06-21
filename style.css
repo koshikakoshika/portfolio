@@ -974,7 +974,7 @@ section {
 .projects {
   position: relative;
   z-index: 10;
-  padding: 100px 8% 80px 8%;
+  padding: 100px 8% 20px 8%;
 }
 
 .projects-grid {
@@ -1081,7 +1081,7 @@ section {
 .workshops {
   position: relative;
   z-index: 10;
-  padding: 100px 8% 80px 8%;
+  padding: 20px 8% 80px 8%;
 }
 
 .workshops .achievements-grid {
