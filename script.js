@@ -215,8 +215,9 @@ function initGSAPAnimations() {
 
 /* 4. Achievements Filter & Carousel Sliders */
 function initAchievementsSlider() {
-  const tabs = document.querySelectorAll(".filter-tab");
-  const sliders = document.querySelectorAll(".slider-container");
+  const tabs = document.querySelectorAll(".achievements .filter-tab");
+  const achievementsSliders = document.querySelectorAll(".achievements .slider-container");
+  const allSliders = document.querySelectorAll(".slider-container");
 
   // Helper: update which card is currently active (centered) in the track
   function updateActiveCard(track) {
@@ -268,7 +269,7 @@ function initAchievementsSlider() {
 
       const filterVal = tab.getAttribute("data-filter");
 
-      sliders.forEach(slider => {
+      achievementsSliders.forEach(slider => {
         const id = slider.getAttribute("id");
         if (id === `slider-${filterVal}`) {
           slider.style.display = "flex";
@@ -292,7 +293,7 @@ function initAchievementsSlider() {
   });
 
   // Carousel Arrow Controls & Drag-To-Scroll Logic
-  sliders.forEach(slider => {
+  allSliders.forEach(slider => {
     const track = slider.querySelector(".slider-track");
     const prevBtn = slider.querySelector(".prev-btn");
     const nextBtn = slider.querySelector(".next-btn");
@@ -387,15 +388,15 @@ function initAchievementsSlider() {
   });
 
   // Initial active card focus on load
-  const activeSlider = document.querySelector(".slider-container.active");
-  if (activeSlider) {
-    const track = activeSlider.querySelector(".slider-track");
+  const activeSliders = document.querySelectorAll(".slider-container.active");
+  activeSliders.forEach(slider => {
+    const track = slider.querySelector(".slider-track");
     if (track) {
       setTimeout(() => {
         updateActiveCard(track);
       }, 300);
     }
-  }
+  });
 }
 
 /* 5. Card 3D Tilt Interaction */
