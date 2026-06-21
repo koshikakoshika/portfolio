@@ -780,6 +780,19 @@ section {
   overflow: hidden;
   transform-style: preserve-3d;
   transform: perspective(1000px);
+  opacity: 0.45;
+  filter: blur(2px);
+  transform: scale(0.9);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Center focused active state */
+.achievement-card.active-card {
+  opacity: 1 !important;
+  filter: none !important;
+  transform: scale(1.03) translateY(-5px) !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.08) !important;
 }
 
 .achievement-icon {

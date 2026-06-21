@@ -177,15 +177,14 @@ function initGSAPAnimations() {
 
   // Achievements reveal
   if (document.querySelector(".achievements")) {
-    gsap.from(".achievement-card", {
+    gsap.from(".achievements-carousel-wrapper", {
       scrollTrigger: {
         trigger: ".achievements",
         start: "top 75%"
       },
-      y: 50,
+      y: 40,
       opacity: 0,
       duration: 0.8,
-      stagger: 0.05,
       ease: "power3.out"
     });
   }
@@ -218,6 +217,37 @@ function initAchievementsSlider() {
   const tabs = document.querySelectorAll(".filter-tab");
   const sliders = document.querySelectorAll(".slider-container");
 
+  // Helper: update which card is currently active (centered) in the track
+  function updateActiveCard(track) {
+    const cards = track.querySelectorAll(".achievement-card");
+    if (cards.length === 0) return;
+
+    const trackRect = track.getBoundingClientRect();
+    const trackCenter = trackRect.left + trackRect.width / 2;
+
+    let closestCard = null;
+    let minDistance = Infinity;
+
+    cards.forEach(card => {
+      const cardRect = card.getBoundingClientRect();
+      const cardCenter = cardRect.left + cardRect.width / 2;
+      const distance = Math.abs(cardCenter - trackCenter);
+
+      if (distance < minDistance) {
+        minDistance = distance;
+        closestCard = card;
+      }
+    });
+
+    cards.forEach(card => {
+      if (card === closestCard) {
+        card.classList.add("active-card");
+      } else {
+        card.classList.remove("active-card");
+      }
+    });
+  }
+
   // Tab Filtering Logic
   tabs.forEach(tab => {
     tab.addEventListener("click", () => {
@@ -231,6 +261,12 @@ function initAchievementsSlider() {
         if (id === `slider-${filterVal}`) {
           slider.style.display = "flex";
           slider.classList.add("active");
+          const track = slider.querySelector(".slider-track");
+          if (track) {
+            setTimeout(() => {
+              updateActiveCard(track);
+            }, 50);
+          }
         } else {
           slider.style.display = "none";
           slider.classList.remove("active");
@@ -288,9 +324,15 @@ function initAchievementsSlider() {
       }
     };
 
-    track.addEventListener("scroll", updateNavButtons);
+    track.addEventListener("scroll", () => {
+      updateNavButtons();
+      updateActiveCard(track);
+    });
     setTimeout(updateNavButtons, 200);
-    window.addEventListener("resize", updateNavButtons);
+    window.addEventListener("resize", () => {
+      updateNavButtons();
+      updateActiveCard(track);
+    });
 
     // Mouse Dragging / Swipe Scroll Interactivity
     let isDown = false;
@@ -322,6 +364,17 @@ function initAchievementsSlider() {
       track.scrollLeft = scrollLeft - walk;
     });
   });
+
+  // Initial active card focus on load
+  const activeSlider = document.querySelector(".slider-container.active");
+  if (activeSlider) {
+    const track = activeSlider.querySelector(".slider-track");
+    if (track) {
+      setTimeout(() => {
+        updateActiveCard(track);
+      }, 300);
+    }
+  }
 }
 
 /* 5. Card 3D Tilt Interaction */
@@ -330,6 +383,11 @@ function initCard3DTilt() {
   
   targetCards.forEach(card => {
     card.addEventListener("mousemove", (e) => {
+      // Only tilt achievements cards if they are active (focused)
+      if (card.classList.contains("achievement-card") && !card.classList.contains("active-card")) {
+        return;
+      }
+
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
@@ -344,7 +402,8 @@ function initCard3DTilt() {
     });
 
     card.addEventListener("mouseleave", () => {
-      card.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)";
+      // Reset inline transform completely to let CSS class rules take over
+      card.style.transform = "";
     });
   });
 }

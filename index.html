@@ -66,23 +66,26 @@
 
           <!-- Right: Glass Card -->
           <div class="hero-card-col">
-            <div class="hero-middle-card glass-panel draggable-card">
-              <div class="about-meta" style="display: flex; flex-direction: column; gap: 20px; padding: 10px 0;">
-                <div class="meta-item" style="display: flex; align-items: center; gap: 20px;">
-                  <span class="meta-number" style="font-family: var(--font-heading); font-size: 2.2rem; font-weight: 800; color: #ffffff; min-width: 60px;">7</span>
-                  <span class="meta-label" style="font-size: 0.85rem; color: var(--text-secondary); text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px;">Internships</span>
-                </div>
-                <div class="meta-item" style="display: flex; align-items: center; gap: 20px;">
-                  <span class="meta-number" style="font-family: var(--font-heading); font-size: 2.2rem; font-weight: 800; color: #ffffff; min-width: 60px;">8</span>
-                  <span class="meta-label" style="font-size: 0.85rem; color: var(--text-secondary); text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px;">Workshops Conducted</span>
-                </div>
-                <div class="meta-item" style="display: flex; align-items: center; gap: 20px;">
-                  <span class="meta-number" style="font-family: var(--font-heading); font-size: 2.2rem; font-weight: 800; color: #ffffff; min-width: 60px;">15+</span>
-                  <span class="meta-label" style="font-size: 0.85rem; color: var(--text-secondary); text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px;">Events</span>
-                </div>
+            <div class="hero-middle-card glass-panel draggable-card" style="padding: 35px 30px;">
+              <div class="card-icon" style="font-size: 2.2rem; color: #ffffff; margin-bottom: 20px; text-align: left;">
+                <i class="fa-solid fa-code-branch"></i>
               </div>
-              <div class="hero-actions" style="margin-top: 25px; display: flex; justify-content: center;">
-                <a href="#projects" class="primary-btn pulse-glow-btn" style="width: 100%; justify-content: center;">Explore Projects <i class="fa-solid fa-arrow-right"></i></a>
+              <blockquote style="border-left: 2px solid #ffffff; padding-left: 15px; margin: 0 0 35px 0; font-style: italic; font-size: 1.05rem; color: var(--text-secondary); line-height: 1.6; text-align: left; font-family: var(--font-body);">
+                "The gap between software and hardware disappears when you use AI to command the real world."
+              </blockquote>
+              <div class="stats-row" style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 20px; gap: 15px;">
+                <div class="stat-item" style="text-align: left; flex: 1;">
+                  <div class="meta-number" style="font-family: var(--font-heading); font-size: 2.2rem; font-weight: 800; color: #ffffff; line-height: 1;">7</div>
+                  <div class="meta-label" style="font-size: 0.7rem; color: var(--text-secondary); text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; margin-top: 5px;">Internships</div>
+                </div>
+                <div class="stat-item" style="text-align: left; flex: 1;">
+                  <div class="meta-number" style="font-family: var(--font-heading); font-size: 2.2rem; font-weight: 800; color: #ffffff; line-height: 1;">25+</div>
+                  <div class="meta-label" style="font-size: 0.7rem; color: var(--text-secondary); text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; margin-top: 5px;">Certificates</div>
+                </div>
+                <div class="stat-item" style="text-align: left; flex: 1;">
+                  <div class="meta-number" style="font-family: var(--font-heading); font-size: 2.2rem; font-weight: 800; color: #ffffff; line-height: 1;">9.04</div>
+                  <div class="meta-label" style="font-size: 0.7rem; color: var(--text-secondary); text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; margin-top: 5px;">CGPA</div>
+                </div>
               </div>
             </div>
           </div>
@@ -727,15 +730,6 @@
               <div class="achievement-card-date">Academic Topper</div>
             </div>
 
-            <!-- 9.83 CGPA Topper Award -->
-            <div class="achievement-card glass-panel" data-category="leadership">
-              <div class="achievement-icon" style="color: var(--accent-blue);"><i class="fa-solid fa-star"></i></div>
-              <h3 class="achievement-card-title">9.83 CGPA Topper Award</h3>
-              <div class="achievement-card-org">SNS College of Technology</div>
-              <p class="achievement-card-desc">Honored during Annual Day for securing the academic Topper position with a 9.83 CGPA in Computer Science & Design.</p>
-              <div class="achievement-card-date">Annual Day 2026</div>
-            </div>
-
             <!-- All Round Performer -->
             <div class="achievement-card glass-panel" data-category="leadership">
               <div class="achievement-icon"><i class="fa-solid fa-medal"></i></div>
@@ -761,7 +755,7 @@
         <div class="project-card glass-panel">
           <div class="project-icon"><i class="fa-solid fa-utensils"></i></div>
           <h3 class="project-title">Dine Line</h3>
-          <p class="project-desc">A food technology and supply chain optimization platform designed to scale healthy meal delivery services (like Daily Harvest) in India. Features real-time IoT cold chain temperature monitoring, AI-driven demand forecasting, and personalized regional menus.</p>
+          <p class="project-desc">Live IoT cold chain temp tracker (graphs update in real-time) and an order carbon footprint calculator.</p>
           <div class="project-tech">
             <span class="project-tag">React</span>
             <span class="project-tag">Zustand</span>
@@ -770,7 +764,7 @@
             <span class="project-tag">Demand Forecasting</span>
           </div>
           <div class="project-links">
-            <a href="file:///d:/portfolio_website/Project/Dine%20Line" target="_blank" class="project-link">View Documentation <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="Project/Dine Line/index.html" target="_blank" class="project-link">Explore Project <i class="fa-solid fa-arrow-right"></i></a>
           </div>
         </div>
 
@@ -778,7 +772,7 @@
         <div class="project-card glass-panel">
           <div class="project-icon"><i class="fa-solid fa-heart-pulse"></i></div>
           <h3 class="project-title">Relax Mate</h3>
-          <p class="project-desc">A healthcare and mental well-being web application helping students and professionals manage stress. Features an interactive HTML5 symmetry drawing canvas (mandala creator), an AI baby photo gallery, and dynamically generated positive affirmations.</p>
+          <p class="project-desc">Working 8-way mandala drawing canvas, mental wellness slide gallery, and positive affirmations generator.</p>
           <div class="project-tech">
             <span class="project-tag">HTML5 Canvas</span>
             <span class="project-tag">Vanilla CSS</span>
@@ -787,7 +781,7 @@
             <span class="project-tag">Mental Wellness</span>
           </div>
           <div class="project-links">
-            <a href="file:///d:/portfolio_website/Project/Relax%20Mate" target="_blank" class="project-link">View Documentation <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="Project/Relax Mate/index.html" target="_blank" class="project-link">Explore Project <i class="fa-solid fa-arrow-right"></i></a>
           </div>
         </div>
 
@@ -795,7 +789,7 @@
         <div class="project-card glass-panel">
           <div class="project-icon"><i class="fa-solid fa-leaf"></i></div>
           <h3 class="project-title">Plant Genesis</h3>
-          <p class="project-desc">A web platform simplifying the patenting process for agricultural innovators and plant breeders in India. Features interactive documentation wizards, patent search, and digital signatures.</p>
+          <p class="project-desc">A multi-step agricultural patent wizard with breeder details, prior art search, and a digital signature pad.</p>
           <div class="project-tech">
             <span class="project-tag">HTML5</span>
             <span class="project-tag">CSS3</span>
@@ -803,7 +797,7 @@
             <span class="project-tag">Patent Wizard</span>
           </div>
           <div class="project-links">
-            <a href="file:///d:/portfolio_website/Project/Plant%20Genesis" target="_blank" class="project-link">View Documentation <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="Project/Plant Genesis/index.html" target="_blank" class="project-link">Explore Project <i class="fa-solid fa-arrow-right"></i></a>
           </div>
         </div>
 
@@ -812,7 +806,37 @@
 
     <!-- Workshops Section -->
     <section class="workshops" id="workshops">
-      <h2 class="section-title">Workshops &amp; <span>Conducted</span></h2>
+      <h2 class="section-title">Workshops <span>Conducted</span></h2>
+      <div style="max-width: 900px; margin: 15px auto 40px auto; text-align: left; color: var(--text-secondary); font-size: 1rem; line-height: 1.7; border-bottom: 1px solid var(--glass-border); padding-bottom: 25px; padding-left: 20px; padding-right: 20px;">
+        <p style="margin-bottom: 12px; font-weight: 500;">Based on the posters you provided, the offline (in-person) event is:</p>
+        <p style="font-weight: 700; color: #ffffff; margin-bottom: 25px; padding-left: 15px; border-left: 3px solid #ffffff; font-size: 1.05rem;">
+          Gemini: Gen AI Based Workshop (Held on 30 September 2025 at 10:00 AM at the Rotaract Club of SNS College of Technology).
+        </p>
+        
+        <p style="margin-bottom: 12px; font-weight: 600; color: #ffffff; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.5px;">Why the others are online / virtual:</p>
+        <ul style="list-style: none; padding-left: 0; margin: 0; display: flex; flex-direction: column; gap: 10px;">
+          <li style="display: flex; align-items: flex-start; gap: 10px;">
+            <span style="color: var(--text-muted); font-size: 0.9rem; margin-top: 3px;"><i class="fa-solid fa-video"></i></span>
+            <div><strong>Google Ignite Series-I:</strong> Explicitly marked as a Virtual event (with a video camera icon).</div>
+          </li>
+          <li style="display: flex; align-items: flex-start; gap: 10px;">
+            <span style="color: var(--text-muted); font-size: 0.9rem; margin-top: 3px;"><i class="fa-solid fa-globe"></i></span>
+            <div><strong>LinkedIn Mastery Workshop:</strong> Explicitly marked as a Free 1-Hour Online Session.</div>
+          </li>
+          <li style="display: flex; align-items: flex-start; gap: 10px;">
+            <span style="color: var(--text-muted); font-size: 0.9rem; margin-top: 3px;"><i class="fa-solid fa-globe"></i></span>
+            <div><strong>Kickstart Your Hackathon Journey:</strong> Explicitly marked as Online.</div>
+          </li>
+          <li style="display: flex; align-items: flex-start; gap: 10px;">
+            <span style="color: var(--text-muted); font-size: 0.9rem; margin-top: 3px;"><i class="fa-solid fa-video"></i></span>
+            <div><strong>Pixel and Prompts (Edition 2):</strong> Explicitly marked as G-MEET (Google Meet virtual event).</div>
+          </li>
+          <li style="display: flex; align-items: flex-start; gap: 10px;">
+            <span style="color: var(--text-muted); font-size: 0.9rem; margin-top: 3px;"><i class="fa-solid fa-video"></i></span>
+            <div><strong>HypeDin Presents Vibe Coding &amp; AI Workshop:</strong> Hosted by Koshika on 19 April 2026 at 5:00 - 6:00 PM (Explicitly marked as an online session).</div>
+          </li>
+        </ul>
+      </div>
       <div class="achievements-grid">
         
         <!-- Gemini: Gen AI Based Workshop (Offline) -->
@@ -1050,7 +1074,7 @@
 
       <!-- Footer elements unified directly inside the contact section container -->
       <div class="footer-bottom-unified" style="border-top: 1px solid var(--glass-border); padding-top: 30px; display: flex; justify-content: space-between; align-items: center; width: 100%; flex-wrap: wrap; gap: 20px;">
-        <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0;">&copy; 2026 Koshika T. Built with AI &amp; design thinking principles.</p>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0;">Get in touch.....&copy; 2026 Koshika T. Built with AI &amp; design thinking principles.</p>
         <div class="footer-socials" style="display: flex; gap: 15px;">
           <a href="https://www.linkedin.com/in/t-koshika/" target="_blank" class="social-icon-btn"><i class="fa-brands fa-linkedin-in"></i></a>
           <a href="#" class="social-icon-btn"><i class="fa-brands fa-github"></i></a>
