@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plant Genesis - Agricultural Patent Wizard</title>
+  <!-- Google Fonts & FontAwesome -->
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Bricolage+Grotesque:wght@700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --bg-dark: #0a0a0a;
+      --bg-card: rgba(255, 255, 255, 0.03);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --accent: #ffffff;
+      --accent-muted: rgba(255, 255, 255, 0.4);
+      --text-main: #ffffff;
+      --text-muted: #888888;
+      --success: #00e676;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'DM Sans', sans-serif;
+      line-height: 1.6;
+      padding: 40px 5%;
+    }
+
+    header {
+      margin-bottom: 40px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .back-btn {
+      color: var(--text-main);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-family: 'JetBrains Mono', monospace;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.02);
+      transition: all 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background: #ffffff;
+      color: #000000;
+    }
+
+    h1 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+    }
+
+    .subtitle {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-top: 5px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .wizard-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 35px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      position: relative;
+    }
+
+    .steps-indicator {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 40px;
+      position: relative;
+    }
+
+    .steps-indicator::before {
+      content: '';
+      position: absolute;
+      top: 15px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--border-color);
+      z-index: 1;
+    }
+
+    .step-dot {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--bg-dark);
+      border: 2px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      font-weight: 600;
+      z-index: 2;
+      transition: all 0.3s ease;
+      color: var(--text-muted);
+    }
+
+    .step-dot.active {
+      border-color: #ffffff;
+      color: #ffffff;
+      box-shadow: 0 0 10px rgba(255,255,255,0.2);
+    }
+
+    .step-dot.completed {
+      background: #ffffff;
+      border-color: #ffffff;
+      color: #000000;
+    }
+
+    .form-step {
+      display: none;
+    }
+
+    .form-step.active {
+      display: block;
+    }
+
+    .form-group {
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+      color: var(--text-muted);
+    }
+
+    .form-control {
+      width: 100%;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border-color);
+      padding: 14px;
+      border-radius: 8px;
+      color: #ffffff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: #ffffff;
+    }
+
+    .wizard-actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 40px;
+      border-top: 1px solid var(--border-color);
+      padding-top: 25px;
+    }
+
+    .btn {
+      padding: 12px 28px;
+      border-radius: 30px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .btn.primary {
+      background: #ffffff;
+      color: #000000;
+      border: 1px solid #ffffff;
+    }
+
+    .btn.primary:hover {
+      background: #dddddd;
+    }
+
+    .btn.secondary {
+      background: transparent;
+      color: #ffffff;
+      border: 1px solid var(--border-color);
+    }
+
+    .btn.secondary:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    /* Signature canvas styling */
+    #sig-canvas {
+      border: 1px dashed var(--border-color);
+      background: rgba(255,255,255,0.01);
+      border-radius: 8px;
+      cursor: crosshair;
+      max-width: 100%;
+    }
+
+    /* Patent Database Simulator styling */
+    .patent-search-panel {
+      padding: 20px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.01);
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .search-status {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--success);
+      margin-top: 10px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div>
+      <h1>PLANT GENESIS</h1>
+      <div class="subtitle">Agricultural Patenting & Breeder Registration Wizard</div>
+    </div>
+    <a href="../../index.html#projects" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back to Portfolio</a>
+  </header>
+
+  <div class="wizard-container">
+    <div class="card">
+      
+      <!-- Steps Header -->
+      <div class="steps-indicator">
+        <div class="step-dot active" id="dot-1">1</div>
+        <div class="step-dot" id="dot-2">2</div>
+        <div class="step-dot" id="dot-3">3</div>
+        <div class="step-dot" id="dot-4">4</div>
+      </div>
+
+      <!-- Step 1: Applicant Details -->
+      <div class="form-step active" id="step-1">
+        <h2 style="font-family: 'Bricolage Grotesque', sans-serif; margin-bottom: 20px;">Step 1: Breeder Information</h2>
+        <div class="form-group">
+          <label for="breeder-name">Full Name / Organization</label>
+          <input type="text" id="breeder-name" class="form-control" placeholder="Enter breeder or agency name">
+        </div>
+        <div class="form-group">
+          <label for="breeder-state">Location (State/Region)</label>
+          <input type="text" id="breeder-state" class="form-control" placeholder="e.g. Tamil Nadu, Punjab">
+        </div>
+      </div>
+
+      <!-- Step 2: Plant Specification -->
+      <div class="form-step" id="step-2">
+        <h2 style="font-family: 'Bricolage Grotesque', sans-serif; margin-bottom: 20px;">Step 2: Plant Characteristics</h2>
+        <div class="form-group">
+          <label for="crop-name">Crop Common Name</label>
+          <input type="text" id="crop-name" class="form-control" placeholder="e.g. Rice, Cotton, Tomato">
+        </div>
+        <div class="form-group">
+          <label for="crop-genus">Botanical Genus / Species</label>
+          <input type="text" id="crop-genus" class="form-control" placeholder="e.g. Oryza sativa">
+        </div>
+        <div class="form-group">
+          <label for="crop-novel">Novel Traits / Unique Qualities</label>
+          <textarea id="crop-novel" class="form-control" rows="3" placeholder="Describe drought resistance, yield rate, pest resilience etc."></textarea>
+        </div>
+      </div>
+
+      <!-- Step 3: Patent Search Simulation -->
+      <div class="form-step" id="step-3">
+        <h2 style="font-family: 'Bricolage Grotesque', sans-serif; margin-bottom: 20px;">Step 3: Global Patent Query Registry</h2>
+        <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 20px;">Checking national plant registries for prior art and similarity indices.</p>
+        <button class="btn primary" id="simulate-search-btn">Run Prior Art Search <i class="fa-solid fa-magnifying-glass"></i></button>
+        <div class="patent-search-panel" id="search-panel">
+          <div id="search-text">Click the button above to begin verification.</div>
+          <div class="search-status" id="search-success"><i class="fa-solid fa-circle-check"></i> NO CONFLICTING PATENTS DETECTED. READY TO PROCEED.</div>
+        </div>
+      </div>
+
+      <!-- Step 4: Digital Signature -->
+      <div class="form-step" id="step-4">
+        <h2 style="font-family: 'Bricolage Grotesque', sans-serif; margin-bottom: 20px;">Step 4: Sign &amp; Authorize</h2>
+        <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 20px;">Draw your digital signature below to authorize Breeder Declaration.</p>
+        <div style="text-align: center; margin-bottom: 20px;">
+          <canvas id="sig-canvas" width="500" height="150"></canvas>
+        </div>
+        <button class="btn secondary" id="clear-sig-btn">Clear Pad</button>
+      </div>
+
+      <!-- Actions -->
+      <div class="wizard-actions">
+        <button class="btn secondary" id="back-btn" style="visibility: hidden;"><i class="fa-solid fa-arrow-left"></i> Previous</button>
+        <button class="btn primary" id="next-btn">Next <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    let currentStep = 1;
+    const totalSteps = 4;
+
+    const nextBtn = document.getElementById('next-btn');
+    const prevBtn = document.getElementById('back-btn');
+
+    function updateStep(step) {
+      document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
+      document.getElementById(`step-${step}`).classList.add('active');
+
+      // Update dots
+      for(let i=1; i<=totalSteps; i++) {
+        const dot = document.getElementById(`dot-${i}`);
+        if (i < step) {
+          dot.className = 'step-dot completed';
+          dot.innerHTML = '<i class="fa-solid fa-check"></i>';
+        } else if (i === step) {
+          dot.className = 'step-dot active';
+          dot.innerHTML = i;
+        } else {
+          dot.className = 'step-dot';
+          dot.innerHTML = i;
+        }
+      }
+
+      // Hide/Show Back Button
+      prevBtn.style.visibility = step === 1 ? 'hidden' : 'visible';
+
+      // Update Next button label
+      if (step === totalSteps) {
+        nextBtn.innerHTML = 'Complete Registry <i class="fa-solid fa-circle-check"></i>';
+      } else {
+        nextBtn.innerHTML = 'Next <i class="fa-solid fa-arrow-right"></i>';
+      }
+    }
+
+    nextBtn.addEventListener('click', () => {
+      if (currentStep < totalSteps) {
+        currentStep++;
+        updateStep(currentStep);
+      } else {
+        alert("Patent registration submitted successfully to National Breeder Registry!");
+        window.location.href = "../../index.html#projects";
+      }
+    });
+
+    prevBtn.addEventListener('click', () => {
+      if (currentStep > 1) {
+        currentStep--;
+        updateStep(currentStep);
+      }
+    });
+
+    // Patent search simulation
+    const simulateBtn = document.getElementById('simulate-search-btn');
+    const searchText = document.getElementById('search-text');
+    const searchSuccess = document.getElementById('search-success');
+
+    simulateBtn.addEventListener('click', () => {
+      simulateBtn.disabled = true;
+      searchText.textContent = "Querying Breeder databases... (Checking similarity matrices)";
+      setTimeout(() => {
+        searchText.textContent = "Analyzing gene sequencing records and species records...";
+        setTimeout(() => {
+          searchText.textContent = "Registry check complete.";
+          searchSuccess.style.display = 'block';
+        }, 1500);
+      }, 1500);
+    });
+
+    // Signature Pad logic
+    const canvas = document.getElementById('sig-canvas');
+    const ctx = canvas.getContext('2d');
+    let signing = false;
+
+    ctx.strokeStyle = '#ffffff';
+    ctx.lineWidth = 2;
+    ctx.lineCap = 'round';
+
+    function draw(e) {
+      if (!signing) return;
+      const rect = canvas.getBoundingClientRect();
+      const x = (e.clientX || e.touches[0].clientX) - rect.left;
+      const y = (e.clientY || e.touches[0].clientY) - rect.top;
+      ctx.lineTo(x, y);
+      ctx.stroke();
+    }
+
+    canvas.addEventListener('mousedown', (e) => {
+      signing = true;
+      ctx.beginPath();
+      const rect = canvas.getBoundingClientRect();
+      ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+    });
+    canvas.addEventListener('mousemove', draw);
+    window.addEventListener('mouseup', () => signing = false);
+
+    canvas.addEventListener('touchstart', (e) => {
+      signing = true;
+      ctx.beginPath();
+      const rect = canvas.getBoundingClientRect();
+      ctx.moveTo(e.touches[0].clientX - rect.left, e.touches[0].clientY - rect.top);
+    });
+    canvas.addEventListener('touchmove', draw);
+    window.addEventListener('touchend', () => signing = false);
+
+    document.getElementById('clear-sig-btn').addEventListener('click', () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    });
+  </script>
+</body>
+</html>

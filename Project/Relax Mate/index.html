@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relax Mate - Mental Wellness & Symmetry Canvas</title>
+  <!-- Google Fonts & FontAwesome -->
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Bricolage+Grotesque:wght@700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --bg-dark: #0a0a0a;
+      --bg-card: rgba(255, 255, 255, 0.03);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --accent: #ffffff;
+      --accent-muted: rgba(255, 255, 255, 0.4);
+      --text-main: #ffffff;
+      --text-muted: #888888;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'DM Sans', sans-serif;
+      line-height: 1.6;
+      padding: 40px 5%;
+    }
+
+    header {
+      margin-bottom: 40px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .back-btn {
+      color: var(--text-main);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-family: 'JetBrains Mono', monospace;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.02);
+      transition: all 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background: #ffffff;
+      color: #000000;
+    }
+
+    h1 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+    }
+
+    .subtitle {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-top: 5px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 30px;
+    }
+
+    @media (max-width: 968px) {
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 25px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      position: relative;
+    }
+
+    .card h2 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 10px;
+    }
+
+    /* Symmetry canvas styles */
+    .canvas-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+
+    canvas {
+      background: #000000;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      cursor: crosshair;
+      touch-action: none;
+      max-width: 100%;
+    }
+
+    .canvas-controls {
+      display: flex;
+      gap: 10px;
+      width: 100%;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn.primary {
+      background: #ffffff;
+      color: #000000;
+      border: 1px solid #ffffff;
+    }
+
+    .btn.primary:hover {
+      background: #dddddd;
+    }
+
+    .btn.secondary {
+      background: transparent;
+      color: #ffffff;
+      border: 1px solid var(--border-color);
+    }
+
+    .btn.secondary:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    /* Affirmation builder */
+    .affirmation-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 180px;
+      text-align: center;
+      padding: 20px;
+      border: 1px dashed var(--border-color);
+      border-radius: 12px;
+      margin-bottom: 20px;
+      background: rgba(255,255,255,0.01);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .affirmation-text {
+      font-size: 1.2rem;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-weight: 700;
+      line-height: 1.4;
+      margin-bottom: 15px;
+      transition: opacity 0.3s ease;
+    }
+
+    /* Photo gallery slider */
+    .gallery-container {
+      position: relative;
+      width: 100%;
+      height: 220px;
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #111;
+      border: 1px solid var(--border-color);
+    }
+
+    .gallery-slide {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .gallery-slide.active {
+      opacity: 1;
+    }
+
+    .gallery-icon {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      color: rgba(255,255,255,0.25);
+    }
+
+    .gallery-caption {
+      font-size: 0.9rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-muted);
+    }
+
+    .gallery-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid var(--border-color);
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      transition: all 0.3s ease;
+    }
+
+    .gallery-btn:hover {
+      background: white;
+      color: black;
+    }
+
+    .gallery-btn.prev { left: 10px; }
+    .gallery-btn.next { right: 10px; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div>
+      <h1>RELAX MATE</h1>
+      <div class="subtitle">Mindfulness, Art Therapy & Meditation Sandbox</div>
+    </div>
+    <a href="../../index.html#projects" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back to Portfolio</a>
+  </header>
+
+  <div class="dashboard-grid">
+    
+    <!-- Left Column: Mandala Symmetry Canvas -->
+    <div class="card">
+      <h2><i class="fa-solid fa-compass-drafting"></i> Symmetry Mandala Drawing Canvas</h2>
+      <div class="canvas-container">
+        <canvas id="mandala" width="450" height="450"></canvas>
+        <div class="canvas-controls">
+          <button class="btn secondary" id="clear-btn"><i class="fa-solid fa-trash-can"></i> Clear Canvas</button>
+          <button class="btn primary" id="color-btn"><i class="fa-solid fa-palette"></i> Toggle Monochrome Inverse</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Positive Affirmation & Meditation Slides -->
+    <div class="dashboard-sidebar" style="display: flex; flex-direction: column; gap: 30px;">
+      
+      <!-- Affirmations Card -->
+      <div class="card">
+        <h2><i class="fa-solid fa-quote-left"></i> Mindful Affirmations</h2>
+        <div class="affirmation-container">
+          <div class="affirmation-text" id="affirmation-box">"Take a deep breath. Focus on this exact moment."</div>
+        </div>
+        <button class="btn primary" style="width: 100%; justify-content: center;" id="next-affirmation-btn">
+          Generate New Affirmation <i class="fa-solid fa-rotate"></i>
+        </button>
+      </div>
+
+      <!-- Baby Photo Gallery Card -->
+      <div class="card">
+        <h2><i class="fa-solid fa-image"></i> Calm Photo Gallery</h2>
+        <div class="gallery-container">
+          <button class="gallery-btn prev" id="prev-slide"><i class="fa-solid fa-chevron-left"></i></button>
+          
+          <div class="gallery-slide active" data-index="0">
+            <div class="gallery-icon"><i class="fa-solid fa-face-smile-beam"></i></div>
+            <h3>Giggling Toddler</h3>
+            <p class="gallery-caption">Laughter releases endorphins and reduces cortisol.</p>
+          </div>
+
+          <div class="gallery-slide" data-index="1">
+            <div class="gallery-icon"><i class="fa-solid fa-cloud-sun"></i></div>
+            <h3>Misty Morning Sunrise</h3>
+            <p class="gallery-caption">A quiet new beginning, full of peace and light.</p>
+          </div>
+
+          <div class="gallery-slide" data-index="2">
+            <div class="gallery-icon"><i class="fa-solid fa-water"></i></div>
+            <h3>Gentle Ocean Ripples</h3>
+            <p class="gallery-caption">Nature's steady rhythmic flow.</p>
+          </div>
+
+          <button class="gallery-btn next" id="next-slide"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    // Symmetry Mandala drawing canvas logic
+    const canvas = document.getElementById('mandala');
+    const ctx = canvas.getContext('2d');
+    let isDrawing = false;
+    let colorMode = 'white'; // White lines on black background, or inverse
+
+    // Clear canvas
+    function clearCanvas() {
+      ctx.fillStyle = '#000000';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      
+      // Draw crosshairs subtly
+      ctx.strokeStyle = 'rgba(255,255,255,0.04)';
+      ctx.lineWidth = 1;
+      
+      // Center vertical and horizontal lines
+      ctx.beginPath();
+      ctx.moveTo(canvas.width / 2, 0);
+      ctx.lineTo(canvas.width / 2, canvas.height);
+      ctx.moveTo(0, canvas.height / 2);
+      ctx.lineTo(canvas.width, canvas.height / 2);
+      
+      // Diagonal lines
+      ctx.moveTo(0, 0);
+      ctx.lineTo(canvas.width, canvas.height);
+      ctx.moveTo(canvas.width, 0);
+      ctx.lineTo(0, canvas.height);
+      
+      ctx.stroke();
+    }
+
+    clearCanvas();
+
+    // Drawing calculations
+    function drawMandala(e) {
+      if (!isDrawing) return;
+
+      const rect = canvas.getBoundingClientRect();
+      const x = (e.clientX || e.touches[0].clientX) - rect.left;
+      const y = (e.clientY || e.touches[0].clientY) - rect.top;
+
+      // Translate coordinates to center
+      const centerX = canvas.width / 2;
+      const centerY = canvas.height / 2;
+      const relX = x - centerX;
+      const relY = y - centerY;
+
+      // Set drawing color
+      ctx.strokeStyle = colorMode === 'white' ? 'rgba(255,255,255,0.85)' : 'rgba(0,0,0,0.85)';
+      ctx.lineWidth = 3;
+      ctx.lineCap = 'round';
+
+      // We draw 8-way symmetry
+      const numSymmetries = 8;
+      for (let i = 0; i < numSymmetries; i++) {
+        ctx.save();
+        ctx.translate(centerX, centerY);
+        ctx.rotate((i * 2 * Math.PI) / numSymmetries);
+        
+        ctx.beginPath();
+        // Subtly track drawing
+        ctx.arc(relX, relY, 3, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Draw mirror line
+        ctx.beginPath();
+        ctx.arc(relX, -relY, 3, 0, Math.PI * 2);
+        ctx.fill();
+        
+        ctx.restore();
+      }
+    }
+
+    canvas.addEventListener('mousedown', () => isDrawing = true);
+    canvas.addEventListener('mousemove', drawMandala);
+    window.addEventListener('mouseup', () => isDrawing = false);
+
+    canvas.addEventListener('touchstart', (e) => {
+      isDrawing = true;
+      drawMandala(e);
+    });
+    canvas.addEventListener('touchmove', drawMandala);
+    window.addEventListener('touchend', () => isDrawing = false);
+
+    document.getElementById('clear-btn').addEventListener('click', clearCanvas);
+    
+    document.getElementById('color-btn').addEventListener('click', () => {
+      if (colorMode === 'white') {
+        colorMode = 'black';
+        canvas.style.backgroundColor = '#ffffff';
+        canvas.style.borderColor = 'rgba(0,0,0,0.1)';
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      } else {
+        colorMode = 'white';
+        canvas.style.backgroundColor = '#000000';
+        canvas.style.borderColor = 'var(--border-color)';
+        clearCanvas();
+      }
+    });
+
+    // Affirmation logic
+    const affirmations = [
+      "You are capable of doing hard things with ease and elegance.",
+      "Your mind is calm, clear, and focused on growth.",
+      "Every small action you take builds towards a bigger vision.",
+      "Give yourself permission to pause, breathe, and reset.",
+      "Your energy is valuable. Direct it towards what inspires you.",
+      "You are in complete command of your focus and state."
+    ];
+
+    const affirmationBox = document.getElementById('affirmation-box');
+    document.getElementById('next-affirmation-btn').addEventListener('click', () => {
+      affirmationBox.style.opacity = 0;
+      setTimeout(() => {
+        const rand = affirmations[Math.floor(Math.random() * affirmations.length)];
+        affirmationBox.textContent = `"${rand}"`;
+        affirmationBox.style.opacity = 1;
+      }, 300);
+    });
+
+    // Photo Gallery Slide Logic
+    const slides = document.querySelectorAll('.gallery-slide');
+    let currentSlide = 0;
+
+    function showSlide(index) {
+      slides.forEach(slide => slide.classList.remove('active'));
+      currentSlide = (index + slides.length) % slides.length;
+      slides[currentSlide].classList.add('active');
+    }
+
+    document.getElementById('prev-slide').addEventListener('click', () => showSlide(currentSlide - 1));
+    document.getElementById('next-slide').addEventListener('click', () => showSlide(currentSlide + 1));
+  </script>
+</body>
+</html>

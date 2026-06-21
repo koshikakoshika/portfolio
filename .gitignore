@@ -1,0 +1,9 @@
+# Ignore large PDFs and LinkedIn HTML exports
+Linkedin post.pdf
+Activity _ Koshika T _ LinkedIn.html
+Activity _ Koshika T _ LinkedIn_files/
+Project/*.pdf
+
+# OS generated files
+.DS_Store
+Thumbs.db
