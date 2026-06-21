@@ -194,15 +194,24 @@ function initGSAPAnimations() {
   if (document.querySelector(".projects")) {
     gsap.from(".project-card", {
       scrollTrigger: {
-        trigger: ".projects",
-        start: "top 75%"
+        trigger: ".projects-grid",
+        start: "top 95%"
       },
-      y: 50,
+      y: 30,
       opacity: 0,
       duration: 0.8,
-      stagger: 0.15,
+      stagger: 0.1,
       ease: "power3.out"
     });
+
+    // Safety fallback: if ScrollTrigger fails to trigger after 1.5 seconds, force reveal project cards
+    setTimeout(() => {
+      document.querySelectorAll(".project-card").forEach(card => {
+        if (gsap.getProperty(card, "opacity") === 0) {
+          gsap.to(card, { opacity: 1, y: 0, duration: 0.5 });
+        }
+      });
+    }, 1500);
   }
 
   // Critical fix: Refresh ScrollTrigger after elements load to align trigger positions
