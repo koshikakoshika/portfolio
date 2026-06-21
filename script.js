@@ -181,10 +181,9 @@ function initGSAPAnimations() {
     gsap.from(".achievements-carousel-wrapper", {
       scrollTrigger: {
         trigger: ".achievements",
-        start: "top 75%"
+        start: "top 85%"
       },
-      y: 40,
-      opacity: 0,
+      y: 30,
       duration: 0.8,
       ease: "power3.out"
     });
@@ -195,10 +194,9 @@ function initGSAPAnimations() {
     gsap.from(".projects .achievements-carousel-wrapper", {
       scrollTrigger: {
         trigger: ".projects",
-        start: "top 75%"
+        start: "top 85%"
       },
-      y: 40,
-      opacity: 0,
+      y: 30,
       duration: 0.8,
       ease: "power3.out"
     });
